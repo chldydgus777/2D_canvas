@@ -9,26 +9,34 @@ var Ball_y = 0;
 var Ballx_speed = 3;
 // y축으로 기울며 속도 빨라짐
 var Bally_speed = 3;
+// 일시정지 재시작 위치
+var position
 
 // 시작 
 const start_button = document.getElementById("start_btn");
-start_button.addEventListener("click", progress)
-start_button.addEventListener("click", clickBtn)
+start_button.addEventListener("click", progress,)
 
-// // 복제하기
-// const copy_button = document.getElementById("copy_btn");
-// copy_button.addEventListener("click")
-// // 멈춤
-// const stop_button = document.getElementById("stop_btn");
-// stop_button.addEventListener("click")
-function clickBtn() {
-    document.getElementById("start_btn").innerText = "<button disabled>시작</button>";
-}
+
 function progress() {
+    const start_button = document.getElementById("start_btn");
+    // start_button.disabled = true;
+    if (start_button.innerHTML == "시작"){
+        start_button.innerHTML = "다시 시작"
+    } else { 
+        start_button.innerHTML = "다시 시작"
+
+    }
 
     // 일시정지
     const pause_button = document.getElementById("pause_btn");
-    pause_button.addEventListener("click", stopinterval)
+    pause_button.addEventListener("click",stopinterval)
+
+
+
+    
+    // 복제
+    const copy_button = document.getElementById("copy_btn");
+    // copy_button.addEventListener("click", make_Ball);
     
     // 공 드로잉
     function drawBall() {
@@ -37,7 +45,7 @@ function progress() {
         // 사각형을 그림 (x축, y축, width, height)
         ctx.rect(Ball_x, Ball_y, 15, 15);
         // fill color 
-        ctx.fillStyle = "red";
+        ctx.fillStyle = "pink";
         // 내부가 채워진 도형
         ctx.fill();
         // 시작 부분과 연결된 직선 추가
@@ -66,8 +74,7 @@ function progress() {
         // 흔적 (이전프레임)Rect 부분을 지우는 코드
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawBall();
-
-        // x,y 축에 dx,dy를 더해줘서 x,y 갱신
+        // Ball_x, Ball_y 축에 Ballx_speed,Bally_speed를 더해줘서 Ball_x, Ball_y 갱신
         Ball_x += Ballx_speed;
         Ball_y += Bally_speed;  
     }
@@ -77,7 +84,33 @@ function progress() {
         clearInterval(refreshIntervalId)
     }
 
-// 10ms 무한 호출
-var refreshIntervalId = setInterval(draw, 10);
+    // 10ms 무한 호출
+    const refreshIntervalId = setInterval(draw, 10);
+
+    // function make_Ball() {
+    //     ctx.beginPath();
+    //     ctx.rect(Ball_x-2, Ball_y - 50, 15, 15);
+    //     ctx.fillStyle = "gold";
+    //     ctx.fill();
+    //     ctx.closePath();
+
+    //     ctx.beginPath();
+    //     ctx.rect(Ball_x + 50, Ball_y-2, 15, 15);
+    //     ctx.fillStyle = "red";
+    //     ctx.fill();
+    //     ctx.closePath();
+
+    //     ctx.beginPath();
+    //     ctx.rect(Ball_x + 50, Ball_y-50, 15, 15);
+    //     ctx.fillStyle = "blue";
+    //     ctx.fill();
+    //     ctx.closePath();
+
+    // }
 
 }
+    // 정지
+    const stop_button = document.getElementById("stop_btn");
+    stop_button.addEventListener("click", function(){
+        stop_button.removeEventListener("click", progress)
+    })

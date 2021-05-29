@@ -41,6 +41,10 @@ h1 {
     display : block;
     margin : 20px auto;
 }
+.Btn:focus {
+    outline:none;
+}
+
 .Btn:hover {
     background-color: cornflowerblue;
     border : 1px solid #ccc;
