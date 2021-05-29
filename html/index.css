@@ -1,21 +1,30 @@
 * {
     font-family: 'Nanum Gothic', sans-serif;
 }
+body {
+    background-color: #ccc;
+}
+canvas {
+    background-color: #eee;
+}
+h1 {
+    padding :20px 0 0 0;
+}
 .container {
     width : 1000px;
-    height : 700px;
-    background-color : #eee;
+    height : 720px;
+    background-color : #ffffff;
     margin : 100px auto;
     text-align: center;
     border-radius: 10px;
 }
-.btn-container {
+.Btn-container {
     width : 100%;
     box-sizing: border-box;
     text-align: center;
     color: white;
 }   
-.btns {
+.Btns {
     margin : 0px auto;
     display : flex;
     width : 500px;
