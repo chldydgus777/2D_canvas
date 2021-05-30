@@ -1,3 +1,5 @@
+//과제 1
+
 // canvas 요소 찾기
 let canvas = document.getElementById("Canvas");
 // canvas에서 컨텍스트 얻기
@@ -8,9 +10,9 @@ let Ball_x = 0;
 // y축, 값이 커질수록 아래로 이동
 let Ball_y = 0;
 // x축으로 기울며 속도 빨라짐
-let Ballx_speed = 3;
+let Ballx_speed = 2;
 // y축으로 기울며 속도 빨라짐
-let Bally_speed = 3;
+let Bally_speed = 2;
 
 
 // 시작 
@@ -26,14 +28,12 @@ start_button.addEventListener("click", progress,)
 function progress() {
 
     const start_button = document.getElementById("start_btn");
-        start_button.disabled = true;
+    start_button.disabled = true;
 
     // 일시정지
     let pause_button = document.getElementById("pause_btn");
-    pause_button.addEventListener("click",stopinterval)
+    pause_button.addEventListener("click", stopinterval)
 
-
-    
     // 공 드로잉
     const drawBall = () => {
         // 새로운 경로 생성
@@ -41,7 +41,7 @@ function progress() {
         // 사각형을 그림 (x축, y축, width, height)
         ctx.rect(Ball_x, Ball_y, 15, 15);
         // fill color 
-        ctx.fillStyle = "pink";
+        ctx.fillStyle = "black";
         // 내부가 채워진 도형
         ctx.fill();
         // 시작 부분과 연결된 직선 추가
@@ -61,7 +61,7 @@ function progress() {
     // 드로잉
     function draw() {
         // 흔적 (이전프레임)Rect 부분을 지우는 코드
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawBall();
         // Ball_x, Ball_y 축에 Ballx_speed,Bally_speed를 더해줘서 Ball_x, Ball_y 갱신
         Ball_x += Ballx_speed;
@@ -72,6 +72,12 @@ function progress() {
     // 호출 중지 [일시정지]
     function stopinterval() {
         clearInterval(refreshIntervalId)
+        if (pause_button.innerHTML == "일시정지") {
+        pause_button.innerHTML = "재개하기"
+        pause_button.addEventListener("click",progress)
+    } else if (pause_button.innerHTML == "재개하기"){
+        pause_button.innerHTML = "일시정지"
+    }
     }
 
     // 10ms 무한 호출
@@ -95,24 +101,37 @@ function make_Ball() {
     pause_button.addEventListener("click",new_stopinterval)
 
         const new_drawBall = () => {
+        
+        // ↖ 
+        // Ball_x -= Ballx_speed;
+        // Ball_y -= Bally_speed;  
         ctx.beginPath();
         ctx.rect(Ball_x-20, Ball_y-20, 15, 15);
         ctx.fillStyle = "black";
         ctx.fill();
         ctx.closePath();
 
+        // ↙ 
+        // Ball_x -= Ballx_speed;
+        // Ball_y += Bally_speed;  
         ctx.beginPath();
         ctx.rect(Ball_x-20, Ball_y+20, 15, 15);
         ctx.fillStyle = "red";
         ctx.fill();
         ctx.closePath();
-
+        
+        //↘ 
+        // Ball_x += Ballx_speed;
+        // Ball_y += Bally_speed;  
         ctx.beginPath();
         ctx.rect(Ball_x+20, Ball_y+20, 15, 15);
         ctx.fillStyle = "green";
         ctx.fill();
         ctx.closePath();
 
+        // ↗ 
+        // Ball_x += Ballx_speed;
+        // Ball_y -= Bally_speed;  
         ctx.beginPath();
         ctx.rect(Ball_x+20, Ball_y-20, 15, 15);
         ctx.fillStyle = "blue";
@@ -141,4 +160,5 @@ function make_Ball() {
         // 10ms 무한 호출   
         const new_refreshInterval = setInterval(new_draw, 10);
     }
+
 
