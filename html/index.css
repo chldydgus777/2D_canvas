@@ -3,6 +3,7 @@
 }
 body {
     background-color: #ccc;
+    max-height : 719px;
 }
 canvas {
     background-color: #eee;

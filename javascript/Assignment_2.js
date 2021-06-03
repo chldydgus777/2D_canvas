@@ -1,21 +1,31 @@
-
 //과제 2
-// (* n값은 배열의 index 입니다.)
 
 const A = [1, 2, 3, 4];
-console.log( A[1].value )
+
 function test(arr) {
-const res = [
-    arr[1]
-];
-
-
-return res;
+    const res = [];
+// class 표현식 
+    ( a = class {
+        // 생성자 class 안에 한개만 존재 가능
+        constructor(b) {
+            this.b = b;
+        }
+        value() {
+            return this.b;
+        }
+    }
+    ),
+    // map 함수로
+    // constructor() new로 호출
+    arr.map((i) => res.push(new a(i)));
+    
+    return res;
 }
-
 const T = test(A);
+console.log(T)
 
-// 조건 1.  T[n].value() === A[n]            // true
-// 조건 2.  T[n].value === T[n+1].value      // true
-// 조건 3.  !T[n].hasOwnProperty("value")    // true
-// 조건 4.  !T[n+1].hasOwnProperty("value")  // true
+
+console.log(T[3].value() === A[3]) // 조건 1 ture
+console.log(T[3].value === T[3].value ) // 조건 2 true
+console.log(!T[3].hasOwnProperty("value") ) // 조건 3 true
+console.log(!T[3].hasOwnProperty("value")) // 조건 4 true 
